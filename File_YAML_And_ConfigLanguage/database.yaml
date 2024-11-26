@@ -49,15 +49,22 @@ constants:
   c: 1.123
   d: 2.12
 
-
 calculations:
   sum:
-    a+b: "a+b"
+    a+b: "!a+b"
   sub:
-    a-b: "a-b"
+    a-b: "!a-b"
   mul:
-    a*b: "a*b"
+    a*b: "!a*b"
   div:
-    a/b: "a/b"
+    a/b: "!a/b"
   paralel:
-    (a+b)*(a-b): "a+b * a-b"
+    (a+b)*(a-b): "!(a+b)*(a-b)"
+
+
+num:
+  - 1
+  - 2
+  - 3
+  - 4
+len_plus_one: "!len(num) + 1"

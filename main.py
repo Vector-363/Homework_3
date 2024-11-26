@@ -2,11 +2,10 @@ import argparse
 import yaml
 from parser import parse_config
 
-
 def main():
-    parser = argparse.ArgumentParser(description="YAML to ConfigLanguage")
-    parser.add_argument("input_file", help="Путь к YAML файлу")
-    parser.add_argument("output_file", help="Путь к выходному файлу")
+    parser = argparse.ArgumentParser(description="YAML to ConfigLanguage Converter")
+    parser.add_argument("input_file", help="Путь к входному YAML файлу")
+    parser.add_argument("output_file", help="Путь к выходному файлу ConfigLanguage")
     args = parser.parse_args()
 
     try:
