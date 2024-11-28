@@ -1,31 +1,31 @@
 from evaluator import evaluate_expression
 import re
 
-def parse_config(yaml_data, context={}):
+def parse_config(yaml_data, context={}, is_top_level=True):
+    for key, value in yaml_data.items():
+        if not isinstance(value, str) or not value.startswith("!"):
+            context[key] = value
+
     result = ""
     for key, value in yaml_data.items():
         if isinstance(value, dict):
-            result += f"$[\n{parse_config(value, context)}\n]\n"
+            result += f"$[\n{parse_config(value, context, False)}\n]\n" # обработка словарей
         elif isinstance(value, list):
-            items = [str(item) for item in value] # упростили обработку списков
-            result += f"array({', '.join(items)})\n"
+            items = [str(item) for item in value]
+            result += f"array({', '.join(items)})\n" # обработка массивов
         elif isinstance(value, str) and value.startswith("!"):
-            #обработка ошибок в выражениях
             try:
-              res = evaluate_expression(value[1:], context)
-              if isinstance(res, str) and "Ошибка" in res:
-                raise ValueError(res) #перебрасываем ошибку дальше
-              result += f"{key} is {res}\n"
+                res = evaluate_expression(value[1:], context)
+                if isinstance(res, str) and "Ошибка" in res:
+                    raise ValueError(res)
+                result += f"{key} is {res}\n" # обработка константных вычислений
             except ValueError as e:
-              raise ValueError(f"Ошибка вычисления выражения '{value}': {e}") #более информативное сообщение об ошибке
-        elif isinstance(value, str) and re.match(r"^\s*'", value): #Проверка на комментарий
-          continue # пропускаем строку, если это комментарий
+                raise ValueError(f"Ошибка вычисления выражения '{value}': {e}")
+        elif isinstance(value, str) and re.match(r"^\s*'", value):
+            continue
+        elif is_top_level:
+            continue
         else:
-            context[key] = value
-            result += f"{key} is {value}\n"
+            result += f"{key} is {value}\n" # обработка констант
+
     return result
-
-
-
-
-
