@@ -28,4 +28,4 @@ def parse_config(yaml_data, context={}, is_top_level=True):
         else:
             result += f"{key} is {value}\n" # обработка констант
 
-    return result
+    return result.strip()
