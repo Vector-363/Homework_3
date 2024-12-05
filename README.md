@@ -95,19 +95,19 @@ cut_output(input_string) - функция для поправки синтакс
      calculations:
      sum:
         #1. Сложение:
-        a+b: "!{a+b}"
+        сложение: "!{a+b}"
      sub:
         #2. Вычитание:
-        a-b: "!{a-b}"
+        вычитание: "!{a-b}"
      mul:
         #3. Умножение:
-        a*b: "!{a*b}"
+        умножение: "!{a*b}"
      div:
         #4. Деление:
-        a/b: "!{a/b}"
+        деление: "!{a/b}"
      paralel:
         # Параллельное вычисление:
-        (a+b)*(a-b): "!{(a+b)*(a-b)}"
+        Параллельное: "!{(a+b)*(a-b)}"
      num:
         -1
         -2
@@ -118,7 +118,7 @@ cut_output(input_string) - функция для поправки синтакс
 
 Выходной файл: 
 
-![image](https://github.com/user-attachments/assets/ca729b13-e255-45c7-8605-ff21c663eb93)
+![image](https://github.com/user-attachments/assets/af3bf563-54bf-469b-ae7d-98d3bd615cdd)
 
 
 
